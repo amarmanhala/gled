@@ -8,7 +8,7 @@ function App() {
 
     // 👇️ adding multiple classes to body tag
     document.body.classList.add(
-      'dark:bg-surface-dark',
+      'dark:bg-neutral-900',
       'bg-surface-light',
       'overflow-hidden',
     );
