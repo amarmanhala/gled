@@ -1,7 +1,15 @@
 .App {
   text-align: center;
 }
-
+.container {
+  grid-template-areas: 
+  "header"
+  "sidebar content"
+  "footer  footer";
+}
+.header {
+  grid-area: header;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
