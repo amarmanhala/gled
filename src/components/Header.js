@@ -1,12 +1,10 @@
 import React from "react";
+import Search from "./Search";
 
 export default function Header() {
   return (
-    <header className="h-12 mx-6 flex items-center justify-end">
-      <nav className="font-medium dark:text-neutral-200">
-        <a href="#" className="ml-3">Create an account</a>
-        <a href="#" className="ml-3">Login</a>
-      </nav>
+    <header className="h-16 px-6 flex items-center justify-end bg-surface-secondary-dark">
+     <div className="w-[320px]"><Search></Search></div>
     </header>
   );
 }
