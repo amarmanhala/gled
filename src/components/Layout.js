@@ -1,16 +1,29 @@
 import React from "react";
+import BalanceCard from "./BalanceCard";
 import Card from "./Card";
+import Footer from "./Footer";
 import Header from "./Header";
+import Main from "./Main";
 import Search from "./Search";
 import Sidebar from "./Sidebar";
+import Transactions from "./Transactions";
 
 export default function Layout() {
   return (
     <>
-    <Header></Header>
-    <div className="min-h-screen flex flex-col w-[680px] my-4 mx-auto">
-    <Card></Card>
-    
+    <div className="grid-container">
+        <div className="header">
+          <Header></Header>
+        </div>
+        <div className="sidebar h-full">
+          <Sidebar></Sidebar>
+        </div>
+        <div className="main h-full">
+          <Main></Main>
+        </div>
+        <div className="bg-sky-600 footer">
+          <Footer></Footer>
+        </div>
     </div>
     </>
     

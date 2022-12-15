@@ -11,6 +11,7 @@ function App() {
       'dark:bg-surface-dark',
       'bg-surface-light',
       'overflow-hidden',
+
     );
 
     // 👇️ removing classes from body element
