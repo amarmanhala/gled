@@ -15,7 +15,7 @@ module.exports = {
       'textColorSecondary': "#767676",
       'placeholder': "#6f6f6f",
       'accent': "##2557a7",
-      'buttonSecondary': "##e4e2e0",
+      'buttonSecondary': "#e4e2e0",
       'successBackground': "##e4f7e5",
       // Dark colors
       'borderColorDark': "#30363d",
