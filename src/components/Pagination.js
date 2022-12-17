@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 export default function Pagination(props) {
   const selectPage = useRef();
   const [currentPage, setCurrentPage] = useState(1);
+  const [disabled, setDisabled] = useState(false);
   const pageNumbers = [];
   useEffect(() => {
     props.paginate(currentPage);
@@ -18,12 +19,15 @@ export default function Pagination(props) {
   }
 
   const next = () => {
-    if(currentPage === pageNumbers.length) {
-      return false;
+    console.log(selectPage.current.value);
+    if(selectPage.current.value === 13) { 
+      console.log("NO MORE");
+      setDisabled(true);
     }
-    console.log(currentPage);
-    selectPage.current.value++;
+    selectPage.current.value = selectPage.current.value + 1;
+
     setCurrentPage(selectPage.current.value);
+    props.paginate(selectPage.current.value);
   };
 
   const previous = () => {
@@ -38,6 +42,7 @@ export default function Pagination(props) {
   const onSelectChange = (value) => {
     console.log(value);
     setCurrentPage(value);
+   console.log(currentPage);
   };
 
   return (
@@ -56,7 +61,7 @@ export default function Pagination(props) {
         ))}
       </select>
       <button
-        disabled={currentPage === pageNumbers.length ? true : false}
+        disabled={disabled}
         onClick={next}
       >
         Next
