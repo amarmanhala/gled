@@ -33,8 +33,8 @@ setActive(pageNumber)
 };
 
   return (
-    <div className="w-full">
-     <div className="w-full h-[560px] flex flex-col overflow-hidden">
+    <div className="w-full pt-6">
+     <div className="w-full h-[500px] flex flex-col overflow-hidden">
       { loading ? (<div>Loading...</div>) : (
         <ul className="divide-y dark:divide-borderColorDark">
           { currentTransactions.map(txn => (

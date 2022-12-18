@@ -21,7 +21,7 @@ export default function Layout() {
         <div className="main h-full">
           <Main></Main>
         </div>
-        <div className="bg-sky-600 footer">
+        <div className="bg-sky-600 footer h-12">
           <Footer></Footer>
         </div>
     </div>
