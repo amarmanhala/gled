@@ -1,15 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
+import ButtonSecondary from "./designSystem/ButtonSecondary";
+import Select from "./designSystem/Select";
 
 export default function Pagination(props) {
   const selectPage = useRef();
   const [currentPage, setCurrentPage] = useState(1);
-  const [disabled, setDisabled] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isPreviousDisabled, setIsPreviousDisabled] = useState(false);
   const pageNumbers = [];
+
   useEffect(() => {
-    props.paginate(currentPage);
-    console.log("Current page" + currentPage);
+    callPaginate(parseInt(currentPage));
+    checkDisabled();
   }, [currentPage]);
 
+  function callPaginate(value) {
+    props.paginate(value);
+  }
   for (
     let i = 1;
     i <= Math.ceil(props.totalTransactions / props.transactionsPerPage);
@@ -19,40 +26,43 @@ export default function Pagination(props) {
   }
 
   const next = () => {
-    console.log(selectPage.current.value);
-    if(selectPage.current.value === 13) { 
-      console.log("NO MORE");
-      setDisabled(true);
-    }
-    selectPage.current.value = selectPage.current.value + 1;
-
-    setCurrentPage(selectPage.current.value);
-    props.paginate(selectPage.current.value);
+    setCurrentPage(parseInt(currentPage) + 1);
   };
 
   const previous = () => {
-    console.log(pageNumbers.length);
-
-    selectPage.current.value--;
-
-    setCurrentPage(currentPage - 1);
-    props.paginate(selectPage.current.value);
+    setCurrentPage(parseInt(currentPage) - 1);
   };
 
   const onSelectChange = (value) => {
-    console.log(value);
-    setCurrentPage(value);
-   console.log(currentPage);
+    setCurrentPage(parseInt(selectPage.current.value));
   };
 
+  function checkDisabled() {
+    if (currentPage === 1) {
+      setIsPreviousDisabled(true);
+      setIsDisabled(false);
+    }
+    if (currentPage > 1 && currentPage <= pageNumbers.length) {
+      setIsPreviousDisabled(false);
+      setIsDisabled(false);
+    }
+    if (currentPage === pageNumbers.length) {
+      setIsDisabled(true);
+      setIsPreviousDisabled(false);
+    }
+  }
+
   return (
-    <nav className="w-full p-2 overflow-scroll">
-      <button disabled={currentPage === 1 ? true : false} onClick={previous}>
-        Previous
-      </button>
+    <nav className="w-full p-2 flex">
+      <ButtonSecondary disabled={isPreviousDisabled} onClick={previous} size="medium">
+        Prev
+      </ButtonSecondary>
+      <div className="px-6 flex items-center">
       <select
         onChange={(event) => onSelectChange(event.target.value)}
         ref={selectPage}
+        value={currentPage}
+        className="px-1 text-md text-textColor dark:text-white hover:bg-buttonSecondary dark:hover:bg-buttonSecondaryDark h-full rounded-md font-bold bg-transparent"
       >
         {pageNumbers.map((number) => (
           <option key={number} value={number}>
@@ -60,12 +70,13 @@ export default function Pagination(props) {
           </option>
         ))}
       </select>
-      <button
-        disabled={disabled}
-        onClick={next}
-      >
+      <div className="flex items-center px-2 font-medium text-textColor dark:text-white"><span>of&nbsp;</span>{pageNumbers.length}</div>
+      </div>
+     
+     
+      <ButtonSecondary disabled={isDisabled} onClick={next} size="medium">
         Next
-      </button>
+      </ButtonSecondary>
     </nav>
   );
 }

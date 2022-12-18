@@ -1,0 +1,3 @@
+export const CONSTANTS = {
+'TRANSACTIONS_PER_PAGE': 6
+}

@@ -2,12 +2,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import TransactionCard from './TransactionCard'
 import Pagination from './Pagination';
+import {CONSTANTS} from "../CONSTANTS"
 
 export default function Transactions() {
  const [transactions, setTransactions] = useState([]);
  const [loading, setLoading] = useState(false);
  const [currentPage, setCurrentPage] = useState(1);
- const [transactionsPerPage, setTransactionsPerPage] = useState(8);
+ const [transactionsPerPage, setTransactionsPerPage] = useState(CONSTANTS.TRANSACTIONS_PER_PAGE);
  const [active, setActive] = useState(1);
 
  useEffect(() => {
@@ -33,9 +34,9 @@ setActive(pageNumber)
 
   return (
     <div className="w-full">
-     <div className="w-full h-[600px] flex flex-col divide-y overflow-scroll">
+     <div className="w-full h-[560px] flex flex-col overflow-hidden">
       { loading ? (<div>Loading...</div>) : (
-        <ul>
+        <ul className="divide-y dark:divide-borderColorDark">
           { currentTransactions.map(txn => (
             <TransactionCard key={txn.id} title={txn.title}></TransactionCard>
           )) }

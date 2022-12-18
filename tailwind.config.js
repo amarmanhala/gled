@@ -12,10 +12,12 @@ module.exports = {
       'inputBorder': "#949494",
       'iconColor': "#949494",
       'textColor': "#2d2d2d",
+      'textColorMuted': "#6d6d6d",
       'textColorSecondary': "#767676",
       'placeholder': "#6f6f6f",
       'accent': "##2557a7",
       'buttonSecondary': "#e4e2e0",
+      'buttonSecondaryDark': "#21262d",
       'successBackground': "##e4f7e5",
       // Dark colors
       'borderColorDark': "#30363d",
