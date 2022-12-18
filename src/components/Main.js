@@ -5,7 +5,7 @@ import Button from './designSystem/Button';
 export default function Main() {
   const [addTransactionForm, setAddTransactionForm] = useState(false);
   return (
-    <main className="bg-white dark:bg-surface-dark border-l border-borderColor dark:border-borderColorDark h-full flex items-center justify-center">
+    <main className="bg-white dark:bg-surface-dark border-l border-borderColor dark:border-borderColorDark h-full flex items-center justify-center bg-slate-50">
       {addTransactionForm && <AddTransaction onClick={() => setAddTransactionForm(!addTransactionForm)}></AddTransaction>}
       {!addTransactionForm && (
         <div>

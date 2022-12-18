@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import 'animate.css';
 import Layout from './components/Layout';
 
 function App() {
