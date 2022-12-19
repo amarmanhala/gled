@@ -42,7 +42,7 @@ export default function AddTransaction(props) {
               </H1>
             </div>
             <div className="py-2">
-              <Input placeholder="☕️ Coffee 🍕 Food ⛽️ Gas 🛍️ Shopping" type="text" value={what} onChange={(event) => setWhat(event.target.value)}></Input>
+              <Input placeholder="Coffee, Food, Gas, Shopping" type="text" value={what} onChange={(event) => setWhat(event.target.value)}></Input>
             <div className="pt-1"> 
               <span className="text-textColorMuted font-medium">&nbsp;{what !== "" && "💡 It is good idea to write just one word."}</span>
             </div>
