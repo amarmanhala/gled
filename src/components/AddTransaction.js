@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./designSystem/Button";
 import ButtonSecondary from "./designSystem/ButtonSecondary";
 import Chip from "./designSystem/Chip";
@@ -12,14 +12,21 @@ export default function AddTransaction(props) {
   const [buttonTitle, setButtonTitle] = useState("Continue")
   const [what, setWhat] = useState("");
   const [howMuch, setHowMuch] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
 
-  function howMuchOnChange() {
+  useEffect(() => {
+    what !== "" ? setIsVisible(true) : setIsVisible(false);
+  }, [what])
 
-  }
+  useEffect(() => {
+    howMuch !== "" ? setIsVisible(true) : setIsVisible(false);
+  }, [howMuch])
+
 
   function next() {
     if(nextStep === 1) {
       setNextStep(2);
+      setIsVisible(false);
     }
     if(nextStep === 2) {
       setNextStep(3);
@@ -92,12 +99,10 @@ export default function AddTransaction(props) {
         )}
 
         <div className="pt-2">
-          <div className="py-2">
-            <Button disabled={what === "" ? true : false } onClick={next}>{nextStep === 3 ? "Save - That's it" : "Continue"}</Button>
+          <div className="py-2 h-12">
+            {isVisible && <Button onClick={next}>{nextStep === 3 ? "Save - That's it" : "Continue"}</Button>}
           </div>
 
-
-         
         </div>
       </div>
       </div>
