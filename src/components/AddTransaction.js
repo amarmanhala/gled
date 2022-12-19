@@ -46,7 +46,7 @@ export default function AddTransaction(props) {
             <div className="pt-1"> 
               <span className="text-textColorMuted font-medium">&nbsp;{what !== "" && "💡 It is good idea to write just one word."}</span>
             </div>
-            <Chip></Chip>
+          
             </div>
           </div>
         )}
@@ -76,7 +76,7 @@ export default function AddTransaction(props) {
           </div>
         )}
 
-        <div className="pt-10">
+        <div className="pt-2">
           <div className="py-2">
             <Button onClick={next}>{buttonTitle}</Button>
           </div>
