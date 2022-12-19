@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Button(props) {
   return (
-    <button onClick={props.onClick} className="w-full p-4 flex items-center justify-center bg-accent-light dark:bg-accent-dark text-white rounded-lg text-lg font-semibold">
+    <button disabled={props.disabled} onClick={props.onClick} className={` ${ props.disabled ? "bg-accentMuted dark:bg-accentMuted" : "bg-accent-light dark:bg-accent-dark" } w-full p-4 flex items-center justify-center text-white rounded-lg text-lg font-semibold`}>
       {props.children}
     </button>
   );

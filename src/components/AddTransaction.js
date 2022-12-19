@@ -4,11 +4,19 @@ import ButtonSecondary from "./designSystem/ButtonSecondary";
 import Chip from "./designSystem/Chip";
 import H1 from "./designSystem/H1";
 import Input from "./designSystem/Input";
+import InputNumber from "./designSystem/InputNumber";
+import HelperText from "./designSystem/HelperText";
 
 export default function AddTransaction(props) {
   const [nextStep, setNextStep] = useState(1);
   const [buttonTitle, setButtonTitle] = useState("Continue")
   const [what, setWhat] = useState("");
+  const [howMuch, setHowMuch] = useState("");
+
+  function howMuchOnChange() {
+
+  }
+
   function next() {
     if(nextStep === 1) {
       setNextStep(2);
@@ -17,13 +25,17 @@ export default function AddTransaction(props) {
       setNextStep(3);
     }
   }
+
+  function previous() {
+    setNextStep(nextStep - 1);
+  }
   return (
     <div className="h-full w-full flex flex-col bg-slate-50 items-center animate__animated animate__fadeIn">
       <div className={`${nextStep === 1 && "flex-row-reverse"} flex items-center py-4 w-full justify-between w-[680px]`}>
       
       {nextStep !== 1 && (
  <div>
- <ButtonSecondary onClick={props.onClick}>Back</ButtonSecondary>
+ <ButtonSecondary onClick={previous}>Back</ButtonSecondary>
 </div>
       )}
 
@@ -44,7 +56,7 @@ export default function AddTransaction(props) {
             <div className="py-2">
               <Input placeholder="Coffee, Food, Gas, Shopping" type="text" value={what} onChange={(event) => setWhat(event.target.value)}></Input>
             <div className="pt-1"> 
-              <span className="text-textColorMuted font-medium">&nbsp;{what !== "" && "💡 It is good idea to write just one word."}</span>
+              <HelperText text="💡 It is good idea to write just one word." isVisible={what !== "" ? true : false}></HelperText>
             </div>
           
             </div>
@@ -58,7 +70,7 @@ export default function AddTransaction(props) {
               </H1>
             </div>
             <div className="py-2">
-              <Input></Input>
+              <InputNumber placeholder="$" value={howMuch} onChange={(event) => setHowMuch(event.target.value)} />
             </div>
           </div>
         )}
@@ -71,14 +83,17 @@ export default function AddTransaction(props) {
               </H1>
             </div>
             <div className="py-2">
-              <Input placeholder="Starbuck | Gas | "></Input>
+              <Input placeholder="Place"></Input>
+              <div className="pt-1"> 
+              <HelperText text="💡 If you want, You can skip it." isVisible={true}></HelperText>
+            </div>
             </div>
           </div>
         )}
 
         <div className="pt-2">
           <div className="py-2">
-            <Button onClick={next}>{buttonTitle}</Button>
+            <Button disabled={what === "" ? true : false } onClick={next}>{nextStep === 3 ? "Save - That's it" : "Continue"}</Button>
           </div>
 
 
