@@ -17,6 +17,7 @@ export default function Login() {
         </div>
         <div className="w-full flex flex-col mt-6">
          <div className="w-full">
+          <form onSubmit={console.log("Submitted...")}>
           {
             continueWithEmail ? (<Input type="password" placeholder="Password"></Input>) : (<Input type="text" placeholder="Email address"></Input>)
           }
@@ -25,8 +26,11 @@ export default function Login() {
             {
               continueWithEmail ? (<Button>Login</Button>) : (<Button onClick={() => setContinueWithEmail(!continueWithEmail)}>Continue with Email</Button> )
             }
+            </div>
+          </form>
+        
             
-          </div>
+          
           <div className="w-full text-center my-6">
         <Link href="/signin">Don't have an account? Sign in</Link>
        </div>
