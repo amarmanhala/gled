@@ -5,6 +5,7 @@ import Link from "./designSystem/Link";
 import LayoutBeta from "./LayoutBeta";
 import Joi from "joi";
 import Alert from "./designSystem/Alert";
+import { login } from "../service/authService";
 
 export default function Login() {
   const [loginErrors, setLoginErrors] = useState(null);
@@ -40,9 +41,15 @@ export default function Login() {
     e.preventDefault();
     if (!validate(email, password)) {
       setLoginErrors(null);
+      //call the server
+      try {
+        login(email, password);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      return false;
     }
-    //call the server
-    console.log("Submitted...");
   }
 
   return (
