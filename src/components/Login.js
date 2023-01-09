@@ -5,10 +5,25 @@ import Link from './designSystem/Link'
 import LayoutBeta from './LayoutBeta';
 
 export default function Login() {
+
   const [continueWithEmail, setContinueWithEmail] = useState(false);
+  const [loginErrors, setLoginErrors] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   useEffect(() => {
     console.log("PASS")
-  }, [continueWithEmail])
+  }, [continueWithEmail]);
+
+  function validate() {
+
+  }
+  function handleLogin(e) {
+    e.preventDefault();
+    setLoginErrors("done");
+  //call the server
+  console.log("Submitted...")
+  }
   return (
    <LayoutBeta>
      <div className="flex flex-col w-[400px] p-4 rounded-md">
@@ -17,9 +32,9 @@ export default function Login() {
         </div>
         <div className="w-full flex flex-col mt-6">
          <div className="w-full">
-          <form onSubmit={console.log("Submitted...")}>
+          <form onSubmit={handleLogin}>
           {
-            continueWithEmail ? (<Input type="password" placeholder="Password"></Input>) : (<Input type="text" placeholder="Email address"></Input>)
+            continueWithEmail ? (<Input type="password" placeholder="Password"value={password} onChange={(event) => setPassword(event.target.value)}></Input>) : (<Input type="email" placeholder="Email address" value={email} onChange={(event) => setEmail(event.target.value)} isThereAnyError={loginErrors}></Input>)
           }
          
           <div className="my-3">

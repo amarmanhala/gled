@@ -9,5 +9,13 @@ axios.interceptors.response.use(null, (error) => {
   if (!expectedError) {
     console.log("Logging error", error);
   }
+
   return Promise.reject(error);
+  
 });
+
+export default {
+  get: axios.get,
+  post: axios.post,
+  delete: axios.delete,
+};
