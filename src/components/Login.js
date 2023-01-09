@@ -18,9 +18,7 @@ export default function Login() {
       .required()
       .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
       .label("Email"),
-    password: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
-      .label("Password"),
+    password: Joi.string().required().label("Password"),
   });
 
   useEffect(() => {
@@ -42,16 +40,24 @@ export default function Login() {
       return true;
     }
   }
+
   function handleLogin(e) {
     e.preventDefault();
-    if (!validate(email)) {
-      setLoginErrors(null);
-      setContinueWithEmail(true);
+    if (!continueWithEmail) {
+      if (!validate(email)) {
+        setLoginErrors(null);
+        setContinueWithEmail(true);
+      }
+    } else {
+      if (!validate(password)) {
+        setLoginErrors(null);
+        setContinueWithEmail(true);
+      }
     }
-
     //call the server
     console.log("Submitted...");
   }
+
   return (
     <LayoutBeta>
       <div className="flex flex-col w-[400px] p-4 rounded-md">
@@ -68,28 +74,22 @@ export default function Login() {
           )}
           <div className="w-full">
             <form onSubmit={handleLogin}>
-              {continueWithEmail ? (
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                ></Input>
-              ) : (
-                <Input
-                  type="email"
-                  placeholder="Email address"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                ></Input>
-              )}
+              <Input
+                type="email"
+                placeholder="Email address"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              ></Input>
+              <div className="h-4"></div>
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              ></Input>
 
               <div className="my-3">
-                {continueWithEmail ? (
-                  <Button>Login</Button>
-                ) : (
-                  <Button>Continue with Email</Button>
-                )}
+                <Button>Login</Button>
               </div>
             </form>
 
