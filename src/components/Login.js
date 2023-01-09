@@ -7,7 +7,6 @@ import Joi from "joi";
 import Alert from "./designSystem/Alert";
 
 export default function Login() {
-  const [continueWithEmail, setContinueWithEmail] = useState(false);
   const [loginErrors, setLoginErrors] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,17 +21,13 @@ export default function Login() {
   });
 
   useEffect(() => {
-    console.log("PASS");
-  }, [continueWithEmail]);
-
-  useEffect(() => {
     if (email === "") {
       setLoginErrors(null);
     }
   }, [email]);
 
-  function validate(data) {
-    const result = schema.validate({ email: data });
+  function validate(email, password) {
+    const result = schema.validate({ email: email, password: password });
     console.log(result);
     if (!result.error) return null;
     for (let item of result.error.details) {
@@ -43,16 +38,8 @@ export default function Login() {
 
   function handleLogin(e) {
     e.preventDefault();
-    if (!continueWithEmail) {
-      if (!validate(email)) {
-        setLoginErrors(null);
-        setContinueWithEmail(true);
-      }
-    } else {
-      if (!validate(password)) {
-        setLoginErrors(null);
-        setContinueWithEmail(true);
-      }
+    if (!validate(email, password)) {
+      setLoginErrors(null);
     }
     //call the server
     console.log("Submitted...");
