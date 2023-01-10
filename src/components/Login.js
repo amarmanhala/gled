@@ -37,19 +37,21 @@ export default function Login() {
     }
   }
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
+    try {
     e.preventDefault();
     if (!validate(email, password)) {
       setLoginErrors(null);
       //call the server
-      try {
-        login(email, password);
-      } catch (error) {
-        console.log(error);
-      }
+        const data = await login(email, password);
+    console.log("line47", data)
     } else {
       return false;
     }
+  } catch (error) {
+    
+    if(error.code === 'ERR_NETWORK') alert(error.message)
+  }
   }
 
   return (
