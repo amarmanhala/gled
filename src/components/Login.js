@@ -6,11 +6,16 @@ import LayoutBeta from "./LayoutBeta";
 import Joi from "joi";
 import Alert from "./designSystem/Alert";
 import { login } from "../service/authService";
+import * as Sentry from "@sentry/react";
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function Login() {
   const [loginErrors, setLoginErrors] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   //Joi schema
   const schema = Joi.object({
@@ -45,14 +50,20 @@ export default function Login() {
         //call the server
         const data = await login(email, password);
         console.log("line47", data);
+        localStorage.setItem('token', data)
+        navigate("/");
+        
+       
       } else {
         return false;
       }
     } catch (error) {
-      if(error.response && error.response.status === 400) {
-        alert(error.message);
-        console.log(error);
+      if(error.response && error.response.status >= 400 && error.response.status < 500) {
         setLoginErrors(error.response.data);
+      }
+      else {
+        Sentry.captureException(error);
+        alert("An unexpected error occurred");
       }
     }
   }

@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {
@@ -12,6 +14,16 @@ import Login from './components/Login';
 import ErrorPage from './components/ErrorPage';
 import Signin from './components/Signin';
 import About from './components/About';
+
+Sentry.init({
+  dsn: "https://11fbe3e92c594d23af674c8e3975752b@o4504483237199872.ingest.sentry.io/4504483242115072",
+  integrations: [new BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 const router = createBrowserRouter([
   {
