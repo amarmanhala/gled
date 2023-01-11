@@ -47,7 +47,7 @@ export default function Login() {
         setLoginErrors(null);
         //call the server
         const data = await login(email, password);
-        console.log("line47", data);
+       
         localStorage.setItem("token", data);
         navigate("/");
       } else {

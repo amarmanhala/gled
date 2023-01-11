@@ -5,6 +5,7 @@ import axios from "axios";
 const apiEndpoint = config.apiUrl + "/users";
 
 export const register = (user) => {
+  console.log(user);
   axios.post(apiEndpoint, {
     email: user.email,
     name: user.name,
